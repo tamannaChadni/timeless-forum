@@ -7,7 +7,7 @@ const loadPost = async () => {
   //    console.log(posts);
   const postContainer = document.getElementById("post-container");
   posts.forEach((post) => {
-    // console.log(post);
+    console.log(post.isActive);
     const postEl = document.createElement("div");
     postEl.classList = `mt-3`;
     postEl.innerHTML = `
@@ -15,16 +15,22 @@ const loadPost = async () => {
                         <div class="card-body">
                             <div class="flex gap-2">
                                 <div>
-                                    <div class="avatar">
+                                    <div class="avatar ${
+                                      post.isActive ? "online" : "offline"
+                                    }">
                                         <div class="w-24 rounded-full">
-                                          <img src="${post.image}" />
+                                          <img src="${post.image}"/>
                                         </div>
                                       </div>
                                 </div>
                                   <div>
                                     <div class="flex gap-2">
-                                        <p  class="font-semibold">${post.category}</p>
-                                        <p  class="font-semibold">Author:${post.author.name}</p>
+                                        <p  class="font-semibold">${
+                                          post.category
+                                        }</p>
+                                        <p  class="font-semibold">Author:${
+                                          post.author.name
+                                        }</p>
                                     </div>
                                     <p  class="font-bold">${post.title}</p>
                                     <p >${post.description}</p>
@@ -54,7 +60,7 @@ const loadPost = async () => {
     
              `;
 
-                    postContainer.appendChild(postEl);
+    postContainer.appendChild(postEl);
   });
 };
 
