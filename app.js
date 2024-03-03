@@ -1,4 +1,3 @@
-// toggleLoadingSpinner(true);
 
 const loadPost = async () => {
   toggleLoadingSpinner(true);
@@ -22,17 +21,14 @@ const loadPost = async () => {
 
   const data = await res.json();
   const posts = data.posts;
-  //    console.log(posts);
+  
 
   const postContainer = document.getElementById("post-container");
   postContainer.innerHTML = "";
 
   let content = "";
   posts.forEach((post) => {
-    // console.log(post.isActive);
-    // const postEl = document.createElement("div");
-
-    // postEl.classList = `mt-3`;
+    
     content += `
         <div class="mt-3">
             <div class="card lg:w-96 bg-base-100 shadow-xl">
@@ -83,7 +79,7 @@ const loadPost = async () => {
         </div>
     `;
 
-    // postContainer.appendChild(postEl);
+    
   });
   setTimeout(() => {
     toggleLoadingSpinner(false);
@@ -106,12 +102,14 @@ function toggleLoadingSpinner(isLoading) {
 }
 
 const showTitle = (e) => {
-  console.log(e.target.dataset.title);
+  
+
   let dataCountEl = document.getElementById("data-count");
   dataCountEl.innerText = parseInt(dataCountEl.innerText) + 1;
 
   const titleShowingCard = document.getElementById("title-with-view-card");
   const titleEL = document.createElement("div");
+
   titleEL.classList = `flex gap-2 justify-between`;
   titleEL.innerHTML = `
     
@@ -140,6 +138,7 @@ const latestPostDisplay = (async () => {
   latestPosts.forEach((latestPost) => {
     const latestPostEl = document.createElement("div");
     latestPostEl.classList = `card w-96 shadow-xl`;
+    
     latestPostEl.innerHTML = `
                  <figure class="px-10 pt-10 ">
                           <img src="${latestPost.cover_image}" alt=""
