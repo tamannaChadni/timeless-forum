@@ -10,7 +10,7 @@ const loadPost = async () => {
       "https://openapi.programming-hero.com/api/retro-forum/posts"
     );
   }
-  document.getElementById("search-text").value = '';
+  document.getElementById("search-text").value = "";
   const data = await res.json();
   const posts = data.posts;
   //    console.log(posts);
@@ -57,7 +57,9 @@ const loadPost = async () => {
                                 <p>${post.posted_time}</p>
                             </div>
                             <div class="card-actions justify-end">
-                                <button><img src="./images/email.png" alt="" srcset=""></button>
+                                <button><img  src="./images/email.png" alt="" srcset="" onclick="showTitle(event)" data-title='${
+                                  post.title
+                                }' data-view='${post.view_count}'></button>
                             </div>
                         </div>
                         </div>
@@ -68,9 +70,30 @@ const loadPost = async () => {
 
     postContainer.appendChild(postEl);
   });
-  //   postSearch();
 };
 loadPost();
+
+const showTitle = (e) => {
+  console.log(e.target.dataset.title);
+  let dataCountEl = document.getElementById("data-count");
+  dataCountEl.innerText = parseInt(dataCountEl.innerText) + 1;
+
+  const titleShowingCard = document.getElementById("title-with-view-card");
+  const titleEL = document.createElement("div");
+  titleEL.classList = `flex gap-2 justify-between`;
+  titleEL.innerHTML = `
+    
+                                <div>
+                                    <p>${e.target.dataset.title}</p>
+                                </div>
+                                <div class="flex gap-1">
+                                    <img src="./images/eye.png" alt="">
+                                    <p>${e.target.dataset.view}</p>
+                                </div>
+                            
+    `;
+  titleShowingCard.appendChild(titleEL);
+};
 
 //   latest post section
 
