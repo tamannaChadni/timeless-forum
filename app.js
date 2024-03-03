@@ -1,6 +1,11 @@
+// toggleLoadingSpinner(true);
+
 const loadPost = async () => {
+  toggleLoadingSpinner(true);
   const searchText = document.getElementById("search-text").value;
+
   let res;
+
   if (searchText) {
     res = await fetch(
       `https://openapi.programming-hero.com/api/retro-forum/posts?category=${searchText}`
@@ -10,68 +15,95 @@ const loadPost = async () => {
       "https://openapi.programming-hero.com/api/retro-forum/posts"
     );
   }
+
   document.getElementById("search-text").value = "";
+
+  console.log(toggleLoadingSpinner);
+
   const data = await res.json();
   const posts = data.posts;
   //    console.log(posts);
+
   const postContainer = document.getElementById("post-container");
   postContainer.innerHTML = "";
+
+  let content = "";
   posts.forEach((post) => {
     // console.log(post.isActive);
-    const postEl = document.createElement("div");
-    postEl.classList = `mt-3`;
-    postEl.innerHTML = `
-        <div class="card lg:w-96 bg-base-100 shadow-xl">
-            <div class="card-body">
-                <div class="flex gap-2">
-                    <div>
-                        <div class="avatar ${
-                          post.isActive ? "online" : "offline"
-                        }">
-                            <div class="w-24 rounded-full">
-                                <img src="${post.image}"/>
-                            </div>
-                            </div>
-                    </div>
+    // const postEl = document.createElement("div");
+
+    // postEl.classList = `mt-3`;
+    content += `
+        <div class="mt-3">
+            <div class="card lg:w-96 bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <div class="flex gap-2">
                         <div>
-                        <div class="flex gap-2">
-                            <p  class="font-semibold">${post.category}</p>
-                            <p  class="font-semibold">Author:${
-                              post.author.name
-                            }</p>
+                            <div class="avatar ${
+                            post.isActive ? "online" : "offline"
+                            }">
+                                <div class="w-24 rounded-full">
+                                    <img src="${post.image}"/>
+                                </div>
+                                </div>
                         </div>
-                        <p  class="font-bold">${post.title}</p>
-                        <p >${post.description}</p>
-                        <hr>
-                        <div class="flex gap-3">
+                            <div>
                             <div class="flex gap-2">
-                                <img src="./images/message.png" alt="">
-                                <p>${post.comment_count}</p>
+                                <p  class="font-semibold">${post.category}</p>
+                                <p  class="font-semibold">Author:${
+                                post.author.name
+                                }</p>
                             </div>
-                            <div class="flex gap-2">
-                                <img src="./images/eye.png" alt="">
-                                <p>${post.view_count}</p>
+                            <p  class="font-bold">${post.title}</p>
+                            <p >${post.description}</p>
+                            <hr>
+                            <div class="flex gap-3">
+                                <div class="flex gap-2">
+                                    <img src="./images/message.png" alt="">
+                                    <p>${post.comment_count}</p>
+                                </div>
+                                <div class="flex gap-2">
+                                    <img src="./images/eye.png" alt="">
+                                    <p>${post.view_count}</p>
+                                </div>
+                                <div class="flex gap-2">
+                                    <img src="./images/clock.png" alt="">
+                                    <p>${post.posted_time}</p>
+                                </div>
+                                <div class="card-actions justify-end">
+                                    <button><img  src="./images/email.png" alt="" srcset="" onclick="showTitle(event)" data-title='${
+                                    post.title
+                                    }' data-view='${post.view_count}'></button>
+                                </div>
                             </div>
-                            <div class="flex gap-2">
-                                <img src="./images/clock.png" alt="">
-                                <p>${post.posted_time}</p>
                             </div>
-                            <div class="card-actions justify-end">
-                                <button><img  src="./images/email.png" alt="" srcset="" onclick="showTitle(event)" data-title='${
-                                  post.title
-                                }' data-view='${post.view_count}'></button>
-                            </div>
-                        </div>
-                        </div>
-                </div> 
-            </div>
-        </div> 
+                    </div> 
+                </div>
+            </div> 
+        </div>
     `;
 
-    postContainer.appendChild(postEl);
+    // postContainer.appendChild(postEl);
   });
+  setTimeout(() => {
+    toggleLoadingSpinner(false);
+    postContainer.innerHTML = content;
+  }, 2000);
 };
 loadPost();
+
+// spinner
+
+function toggleLoadingSpinner(isLoading) {
+  const loadingSpinner = document.getElementById("loading-spinner");
+  if (isLoading) {
+    loadingSpinner.classList.remove("hidden");
+  } else {
+    console.log(loadingSpinner);
+    loadingSpinner.classList.add("hidden");
+    console.log(loadingSpinner);
+  }
+}
 
 const showTitle = (e) => {
   console.log(e.target.dataset.title);
@@ -84,7 +116,7 @@ const showTitle = (e) => {
   titleEL.innerHTML = `
     
                                 <div>
-                                    <p>${e.target.dataset.title}</p>
+                                    <p class="font-semibold">${e.target.dataset.title}</p>
                                 </div>
                                 <div class="flex gap-1">
                                     <img src="./images/eye.png" alt="">

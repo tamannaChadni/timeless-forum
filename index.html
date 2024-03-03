@@ -89,12 +89,12 @@
         <!-- banner section -->
     </header>
     <main class="container mx-auto space-y-5 ">
-        <section class="hidden">
-            <div id="loading-spinner" class="text-center my-40">
+        <!-- lets discuss -->
+        <!-- <section id="loading-spinner" class="hidden">
+            <div class="text-center my-40">
                 <span class="loading loading-spinner loading-lg"></span>
             </div>
-        </section>
-        <!-- lets discuss -->
+        </section> -->
         <section>
             <!-- text part -->
             <div class="mt-8 text-center">
@@ -104,11 +104,14 @@
             </div>
             <!-- text part -->
             <!-- card part -->
+            <div id="loading-spinner" class="text-center my-40 hidden">
+                <span class="loading loading-spinner loading-lg"></span>
+            </div>
             <div class="mt-4 flex-row gap-3 lg:flex lg:gap-4 lg:justify-center">
                 <div id="post-container">
                 </div>
-                <div id="title-part">
-                    <div class="card lg:w-96 bg-base-100 shadow-xl">
+                <div id="title-part" class=" mt-2">
+                    <div class="card lg:w-96 bg-base-100 shadow-xl ">
                         <div class="card-body" id="title-showing-card">
                             <div class="card-actions flex gap-2 justify-between">
                                 <div>
@@ -118,9 +121,9 @@
                                     <p>Mark as read (<span id="data-count">0</span>) </p>
                                 </div>
                             </div>
-                             <div id="title-with-view-card" >
-                                
-                            </div> 
+                            <div id="title-with-view-card">
+
+                            </div>
                         </div>
                     </div>
                 </div>
