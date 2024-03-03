@@ -1,11 +1,21 @@
-const loadPost = (async () => {
-  const res = await fetch(
-    "https://openapi.programming-hero.com/api/retro-forum/posts"
-  );
+const loadPost = async () => {
+  const searchText = document.getElementById("search-text").value;
+  let res;
+  if (searchText) {
+    res = await fetch(
+      `https://openapi.programming-hero.com/api/retro-forum/posts?category=${searchText}`
+    );
+  } else {
+    res = await fetch(
+      "https://openapi.programming-hero.com/api/retro-forum/posts"
+    );
+  }
+  document.getElementById("search-text").value = '';
   const data = await res.json();
   const posts = data.posts;
   //    console.log(posts);
   const postContainer = document.getElementById("post-container");
+  postContainer.innerHTML = "";
   posts.forEach((post) => {
     // console.log(post.isActive);
     const postEl = document.createElement("div");
@@ -58,10 +68,11 @@ const loadPost = (async () => {
 
     postContainer.appendChild(postEl);
   });
-})();
+  //   postSearch();
+};
+loadPost();
 
-    //   latest post section
-
+//   latest post section
 
 const latestPostDisplay = (async () => {
   const res = await fetch(
