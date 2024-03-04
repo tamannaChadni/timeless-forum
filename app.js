@@ -1,4 +1,3 @@
-
 const loadPost = async () => {
   toggleLoadingSpinner(true);
   const searchText = document.getElementById("search-text").value;
@@ -21,14 +20,12 @@ const loadPost = async () => {
 
   const data = await res.json();
   const posts = data.posts;
-  
 
   const postContainer = document.getElementById("post-container");
   postContainer.innerHTML = "";
 
   let content = "";
   posts.forEach((post) => {
-    
     content += `
         <div class="mt-3">
             <div class="card lg:w-96 bg-base-100 shadow-xl">
@@ -36,7 +33,7 @@ const loadPost = async () => {
                     <div class="flex gap-2">
                         <div>
                             <div class="avatar ${
-                            post.isActive ? "online" : "offline"
+                              post.isActive ? "online" : "offline"
                             }">
                                 <div class="w-24 rounded-full">
                                     <img src="${post.image}"/>
@@ -45,14 +42,16 @@ const loadPost = async () => {
                         </div>
                             <div>
                             <div class="flex gap-2">
-                                <p  class="font-semibold">${post.category}</p>
-                                <p  class="font-semibold">Author:${
-                                post.author.name
+                                <p  class="font-semibold text-sm"> #${
+                                  post.category
+                                }</p>
+                                <p  class="font-semibold text-sm">Author:${
+                                  post.author.name
                                 }</p>
                             </div>
                             <p  class="font-bold">${post.title}</p>
                             <p >${post.description}</p>
-                            <hr>
+                            <hr class="my-2">
                             <div class="flex gap-3">
                                 <div class="flex gap-2">
                                     <img src="./images/message.png" alt="">
@@ -68,7 +67,7 @@ const loadPost = async () => {
                                 </div>
                                 <div class="card-actions justify-end">
                                     <button><img  src="./images/email.png" alt="" srcset="" onclick="showTitle(event)" data-title='${
-                                    post.title
+                                      post.title
                                     }' data-view='${post.view_count}'></button>
                                 </div>
                             </div>
@@ -78,8 +77,6 @@ const loadPost = async () => {
             </div> 
         </div>
     `;
-
-    
   });
   setTimeout(() => {
     toggleLoadingSpinner(false);
@@ -102,21 +99,19 @@ function toggleLoadingSpinner(isLoading) {
 }
 
 const showTitle = (e) => {
-  
-
   let dataCountEl = document.getElementById("data-count");
   dataCountEl.innerText = parseInt(dataCountEl.innerText) + 1;
 
   const titleShowingCard = document.getElementById("title-with-view-card");
   const titleEL = document.createElement("div");
 
-  titleEL.classList = `flex gap-2 justify-between`;
+  titleEL.classList = `flex gap-2 justify-between `;
   titleEL.innerHTML = `
     
                                 <div>
                                     <p class="font-semibold">${e.target.dataset.title}</p>
                                 </div>
-                                <div class="flex gap-1">
+                                <div class="flex gap-2 ">
                                     <img src="./images/eye.png" alt="">
                                     <p>${e.target.dataset.view}</p>
                                 </div>
@@ -137,8 +132,8 @@ const latestPostDisplay = (async () => {
   const latestPostContainer = document.getElementById("latest-post-container");
   latestPosts.forEach((latestPost) => {
     const latestPostEl = document.createElement("div");
-    latestPostEl.classList = `card w-96 shadow-xl`;
-    
+    latestPostEl.classList = `card  shadow-xl`;
+
     latestPostEl.innerHTML = `
                  <figure class="px-10 pt-10 ">
                           <img src="${latestPost.cover_image}" alt=""
