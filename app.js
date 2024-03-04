@@ -28,9 +28,9 @@ const loadPost = async () => {
   posts.forEach((post) => {
     content += `
         <div class="mt-3">
-            <div class="card lg:w-96 bg-base-100 shadow-xl">
+            <div class="card  bg-indigo-50 shadow-xl">
                 <div class="card-body">
-                    <div class="flex gap-2">
+                    <div class="flex gap-4">
                         <div>
                             <div class="avatar ${
                               post.isActive ? "online" : "offline"
@@ -41,7 +41,7 @@ const loadPost = async () => {
                                 </div>
                         </div>
                             <div>
-                            <div class="flex gap-2">
+                            <div class="flex">
                                 <p  class="font-semibold text-sm"> #${
                                   post.category
                                 }</p>
@@ -105,7 +105,7 @@ const showTitle = (e) => {
   const titleShowingCard = document.getElementById("title-with-view-card");
   const titleEL = document.createElement("div");
 
-  titleEL.classList = `flex gap-2 justify-between `;
+  titleEL.classList = `flex gap-2 justify-between bg-base-100 rounded-xl p-3 mt-2`;
   titleEL.innerHTML = `
     
                                 <div>
